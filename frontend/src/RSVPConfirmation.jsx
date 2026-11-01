@@ -1,7 +1,9 @@
 import React from "react";
 import Monogram from "./Monogram";
 import CalendarAction from "./CalendarAction";
-export default function RSVPConfirmation({ record, onEdit, onNew, notice }) {
+export default function RSVPConfirmation({ record, onEdit, onNew, notice, disabled = false, storageNotice }) {
+  // Defensive guard for integrations loading a receipt asynchronously.
+  if (!record) return null;
   const guest = record.name ? `, ${record.name}` : "";
   const canEdit =
     typeof record.canEdit === "boolean"
@@ -24,16 +26,17 @@ export default function RSVPConfirmation({ record, onEdit, onNew, notice }) {
       </p>
       <div className="confirmation-actions">
         {canEdit && (
-          <button className="button dark" onClick={onEdit}>
+          <button type="button" className="button dark" disabled={disabled} onClick={onEdit}>
             Edit My RSVP
           </button>
         )}
         {record.attendance === "yes" && <CalendarAction />}
       </div>
+      {storageNotice && <p className="small" role="status">{storageNotice}</p>}
       {onNew && (
         <div className="rsvp-edit-at-end">
           <p className="small">Replying for someone else on this device?</p>
-          <button type="button" className="button outline" onClick={onNew}>
+          <button type="button" className="button outline" disabled={disabled} onClick={onNew}>
             Create another RSVP
           </button>
           <p className="small">Use their own phone number and, if provided, their own email address.</p>

@@ -5,7 +5,7 @@ import RSVPConfirmation from "./RSVPConfirmation";
 import ContactFields, { contactErrors } from "./ContactFields";
 import ErrorCard from "./ErrorCard";
 import { useOutIn } from "./Transition";
-import { RECEIPT_KEY, receiptFor, parseReceipt } from "./rsvpReceipt";
+import { loadReceipt, saveReceipt, clearReceipt } from "./rsvpReceipt";
 const EMPTY = {
   name: "",
   country: "KE",
@@ -34,12 +34,9 @@ const random = () =>
   ).join("");
 export default function RSVP() {
   const [fields, setFields] = useState(EMPTY),
-    [record, setRecord] = useState(() => parseReceipt(read(RECEIPT_KEY)));
-  const [mode, setMode, leaving] = useOutIn(
-    parseReceipt(read(RECEIPT_KEY))
-      ? "saved"
-      : "new",
-  );
+    [record, setRecord] = useState(loadReceipt);
+  const [mode, setMode, leaving] = useOutIn(record ? "saved" : "new");
+  const [storageNotice, setStorageNotice] = useState("");
   const [busy, setBusy] = useState(false),
     [error, setError] = useState(""),
     [errors, setErrors] = useState({});
@@ -73,12 +70,11 @@ export default function RSVP() {
   }
   function startNew() {
     // A shared device is not a guest identity. Start a separate POST, never an edit.
-    if (busy) return;
+    if (busy || leaving) return;
     if (token) api(API_BASE, "/api/rsvp/edit/logout", {
       method: "POST", body: {}, token,
     }).catch(() => {});
     setToken("");
-    setRecord(null);
     setFields({ ...EMPTY });
     setErrors({});
     setError("");
@@ -87,8 +83,13 @@ export default function RSVP() {
     // Rotate the retry key so the next person's response is not replayed as the first.
     submission.current = random();
     store("sk-email-submission", submission.current);
-    try { localStorage.removeItem(RECEIPT_KEY); } catch {}
-    setMode("new");
+    // Clear the receipt only when the outgoing card has finished fading.
+    // Otherwise it renders for one frame with a null record and crashes.
+    setMode("new", () => {
+      clearReceipt();
+      setRecord(null);
+      setStorageNotice("");
+    });
   }
   function verify() {
     setToken("");
@@ -129,7 +130,8 @@ export default function RSVP() {
         ...fields,
         email: fields.email.trim() || null,
       };
-      store(RECEIPT_KEY, JSON.stringify(receiptFor(saved)));
+      const persistent = saveReceipt(saved);
+      setStorageNotice(persistent ? "" : "Your RSVP was saved, but this browser is blocking permanent storage. The thank-you may not remain after closing this tab. Please use the same browser address and allow site storage to remember it.");
       setRecord(saved);
       setMode("saved");
     } catch (e) {
@@ -177,6 +179,8 @@ export default function RSVP() {
               record={record}
               onEdit={verify}
               onNew={startNew}
+              disabled={leaving || busy}
+              storageNotice={storageNotice}
             />
           ) : (
             <>

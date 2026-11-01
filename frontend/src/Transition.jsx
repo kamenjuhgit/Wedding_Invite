@@ -44,16 +44,21 @@ export function useOutIn(initial) {
   const [leaving, setLeaving] = useState(false);
   const timer = useRef();
   useEffect(() => () => clearTimeout(timer.current), []);
-  const change = (next) => {
+  const change = (next, onCommit) => {
     clearTimeout(timer.current);
-    if (reduced()) {
+    const commit = () => {
+      // Keep outgoing content valid until its fade finishes; React batches both updates.
+      onCommit?.();
       setMode(next);
+      setLeaving(false);
+    };
+    if (reduced()) {
+      commit();
       return;
     }
     setLeaving(true);
     timer.current = setTimeout(() => {
-      setMode(next);
-      setLeaving(false);
+      commit();
     }, motion.swap);
   };
   return [mode, change, leaving];
