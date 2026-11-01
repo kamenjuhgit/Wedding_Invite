@@ -19,15 +19,15 @@ export const wedding = {
   maxGuests: 6, // Keep in sync with MAX_GUESTS in backend/.env. Includes the responding guest.
   dressCode: "Dress beautifully. Feel comfortable.",
   dressNote:
-    "We’ll be celebrating outdoors, so shoes that love the grass are a lovely idea.",
+    "We’ll be celebrating outdoors and the attire details will be shared closer to our special day.",
   schedule: [
     {
-      time: "Morning",
+      time: "11:00 AM",
       title: "The vows",
       text: "A ceremony beneath the trees, surrounded by the people we love.",
     },
     {
-      time: "After the ceremony",
+      time: "12:30 PM",
       title: "A little garden mingling",
       text: "Something to sip, familiar faces, and a little time to take it all in.",
     },
