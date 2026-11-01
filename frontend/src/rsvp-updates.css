@@ -1,0 +1,217 @@
+/* Small additions reuse the invitation's paper, botanical art and sage typography. */
+.rsvp-flow .choices {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+.rsvp-flow .choices label {
+  min-height: 48px;
+}
+.rsvp-flow input,
+.rsvp-flow select,
+.rsvp-flow textarea,
+.admin-editor input,
+.admin-editor select,
+.admin-editor textarea {
+  max-width: 100%;
+  min-width: 0;
+  font-size: 16px;
+}
+.rsvp-flow label,
+.admin-editor label {
+  min-width: 0;
+}
+.rsvp-flow .field-error,
+.admin-shell .field-error {
+  color: #8d3545;
+  display: block;
+  line-height: 1.5;
+}
+[aria-invalid="true"] {
+  border-color: #8d3545 !important;
+}
+.garden-error {
+  background:
+    linear-gradient(#fffaf2eb, #fffaf2eb),
+    url("/garden-480.webp") center/cover;
+  border: 1px solid #b88b91;
+  padding: 22px;
+  margin: 18px 0;
+  text-align: center;
+  border-radius: 18px;
+  color: #573b40;
+}
+.garden-error h3 {
+  font:
+    italic 24px/1.3 Georgia,
+    serif;
+  margin: 8px 0;
+}
+.garden-error p {
+  font-size: 15px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.garden-not-found {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 36px 24px;
+  background: #faf6ec url("/garden-stationery.webp") center/cover;
+  color: #465c3d;
+}
+.garden-not-found h1 {
+  font:
+    clamp(36px, 7vw, 64px) / 1.15 Georgia,
+    serif;
+}
+.garden-not-found p {
+  max-width: 38ch;
+}
+.code-timer {
+  color: #526447;
+  font-variant-numeric: tabular-nums;
+}
+.otp-card form {
+  display: grid;
+  gap: 16px;
+  margin: 22px 0;
+}
+.otp-card small,
+.admin-editor small {
+  display: block;
+  line-height: 1.5;
+  font-size: 12px;
+  margin-top: 7px;
+}
+.password-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.password-row input {
+  flex: 1;
+  min-width: 0;
+}
+.password-row button {
+  min-height: 44px;
+  flex-shrink: 0;
+}
+.login-card .remember {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  margin: 20px 0;
+}
+.login-card .remember input {
+  width: 20px;
+}
+.admin-editor,
+.delete-confirmation {
+  margin: 24px 0;
+  border: 1px solid #a2ad94;
+  background: #fffaf1;
+  padding: clamp(20px, 4vw, 38px);
+  border-radius: 16px;
+}
+.admin-editor form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.admin-editor label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.admin-editor input,
+.admin-editor select,
+.admin-editor textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #a2ad94;
+  background: #fffdf8;
+}
+.admin-shell .stats {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.admin-toolbar > div {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.admin-shell td button {
+  display: block;
+  min-height: 44px;
+  margin-bottom: 4px;
+}
+.admin-shell button {
+  cursor: pointer;
+}
+.badge.maybe {
+  background: #f1e5dc;
+  color: #725938;
+}
+.badge.pending {
+  background: #e7e9e2;
+  color: #526447;
+}
+.admin-shell :focus-visible,
+.rsvp-flow :focus-visible {
+  outline: 3px solid #64794f;
+  outline-offset: 3px;
+}
+@media (max-width: 600px) {
+  .admin-editor form {
+    grid-template-columns: 1fr;
+  }
+  .admin-shell .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .password-row {
+    flex-wrap: wrap;
+  }
+}
+
+/* Keep the country code and national number side by side, including narrow phones. */
+.phone-field-group {
+  min-width: 0;
+  width: 100%;
+}
+.phone-inline-row {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 8px;
+  align-items: start;
+}
+.phone-inline-row label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  margin: 0;
+}
+.phone-inline-row input,
+.phone-inline-row select {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  height: 48px;
+  padding-inline: 8px;
+}
+.phone-field-group > small {
+  display: block;
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.rsvp-edit-at-end {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid #c8cdbd;
+  text-align: center;
+}

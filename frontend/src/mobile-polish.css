@@ -1,0 +1,981 @@
+/* Final refinement layer: original artwork, type and wording remain in invitation.css.
+   All continuous motion belongs to BotanicalScene, mounted in exactly three scenes. */
+:root {
+  --ivory: #f8f4eb;
+  --sage: #586b50;
+  --blush: #c7979a;
+  --motion-ease: cubic-bezier(0.22, 0.7, 0.15, 1);
+}
+html {
+  scrollbar-color: #c69b9d #f8f4eb;
+  scrollbar-width: thin;
+  scroll-padding-top: 90px;
+}
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ivory);
+}
+::-webkit-scrollbar-thumb {
+  background: #c69b9d;
+  border: 2px solid var(--ivory);
+  border-radius: 12px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ab7e83;
+}
+body {
+  background:
+    radial-gradient(ellipse at 10% 20%, #dfe5d4, transparent 50%),
+    radial-gradient(ellipse at 95% 70%, #ead2d2, transparent 55%), #f5f1e7;
+}
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+button,
+a.button {
+  min-height: 44px;
+}
+:focus-visible {
+  outline: 2px solid #647e58;
+  outline-offset: 5px;
+}
+input,
+select,
+textarea {
+  font-size: 16px !important;
+  max-width: 100%;
+}
+img {
+  max-width: 100%;
+}
+.brand-mark {
+  display: inline-block;
+  object-fit: contain;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+.brand-light {
+  filter: brightness(0) invert(1);
+}
+.invitation.refined-invitation {
+  width: min(100%, 680px);
+  max-width: 680px;
+  margin-inline: auto;
+  box-shadow: 0 15px 90px #53654820;
+  transition: opacity 180ms ease;
+  overflow: clip;
+}
+.invitation.refined-invitation[hidden] {
+  display: none;
+}
+.refined-invitation.is-revealing {
+  opacity: 0;
+  animation: none !important;
+}
+.refined-invitation.is-revealed {
+  opacity: 1;
+  animation: invitation-bloom 900ms ease both !important;
+}
+.refined-invitation.returning {
+  opacity: 0;
+  animation: none !important;
+}
+@keyframes invitation-bloom {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.nav {
+  padding: 8px 18px;
+  height: auto;
+  min-height: 64px;
+  gap: 12px;
+}
+.nav nav {
+  gap: 14px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.return-envelope {
+  font: inherit;
+  font-size: 10px;
+  color: var(--sage);
+  border: 0;
+  background: none;
+  padding: 4px 0;
+  cursor: pointer;
+}
+.nav .monogram {
+  line-height: 1;
+}
+.nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+/* The envelope has a back, inset letter, side folds, front pocket and hinged flap.
+   Depth comes from separate paper planes, rather than a flat button illustration. */
+.letter-stage {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  background: #f8f4eb url("/garden-800.webp") center/cover;
+  min-height: 100svh;
+}
+.letter-stage:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(ellipse at center, #fffaf38c, transparent 75%);
+}
+.envelope-scene {
+  width: min(84vw, 530px);
+  position: relative;
+  perspective: 1400px;
+  z-index: 3;
+  margin-top: 5vh;
+}
+.physical-envelope {
+  width: 100%;
+  aspect-ratio: 1.44;
+  position: relative;
+  transform: rotate(-2deg);
+  filter: drop-shadow(0 22px 24px #5b50422b);
+  transform-style: preserve-3d;
+}
+.envelope-back,
+.envelope-pocket,
+.envelope-fold,
+.envelope-flap,
+.paper-letter {
+  position: absolute;
+  inset: 0;
+  background-color: #f4ebdc;
+  background-image: repeating-linear-gradient(
+    13deg,
+    #8d7d6910 0 0.5px,
+    transparent 0.5px 3px
+  );
+  border-radius: 4px;
+}
+.envelope-back {
+  background-color: #ded2bd;
+  box-shadow: inset 0 0 12px #8c795644;
+}
+.paper-letter {
+  inset: 5% 5% 4%;
+  z-index: 1;
+  background-color: #fffcf5;
+  border: 1px solid #c9bda45c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 5px #85755b33;
+}
+.envelope-pocket {
+  z-index: 3;
+  clip-path: polygon(0 100%, 50% 40%, 100% 100%);
+  background: linear-gradient(170deg, #efe4d1, #fffaf0);
+  filter: drop-shadow(0 -2px 2px #8e7d5c44);
+}
+.envelope-fold {
+  z-index: 2;
+  background: linear-gradient(135deg, #fffaf0, #e9dfce);
+}
+.fold-left {
+  clip-path: polygon(0 0, 55% 53%, 0 100%);
+}
+.fold-right {
+  clip-path: polygon(100% 0, 45% 53%, 100% 100%);
+  background: linear-gradient(225deg, #fffaf0, #e9dfce);
+}
+.envelope-flap {
+  z-index: 4;
+  clip-path: polygon(0 0, 100% 0, 50% 59%);
+  background: linear-gradient(180deg, #fffbf1 0%, #eee2ce 58%, #d4c5aa 59%);
+  transform-origin: 50% 0;
+  backface-visibility: visible;
+  filter: drop-shadow(0 3px 2px #78654b44);
+}
+.seal-control {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  transform: translate(-50%, -50%);
+  width: clamp(84px, 23vw, 120px);
+  height: clamp(84px, 23vw, 120px);
+  padding: 0;
+  border: 0;
+  background: none;
+  z-index: 6;
+  cursor: pointer;
+  filter: drop-shadow(1px 6px 4px #684c3a60);
+}
+.seal-control:focus-visible {
+  outline-offset: 7px;
+  border-radius: 48%;
+}
+.wax-half {
+  position: absolute;
+  inset: 0;
+}
+.wax-half svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.half-left {
+  clip-path: polygon(
+    0 0,
+    52% 0,
+    48% 25%,
+    54% 43%,
+    47% 62%,
+    53% 79%,
+    50% 100%,
+    0 100%
+  );
+}
+.half-right {
+  clip-path: polygon(
+    52% 0,
+    100% 0,
+    100% 100%,
+    50% 100%,
+    53% 79%,
+    47% 62%,
+    54% 43%,
+    48% 25%
+  );
+}
+.wax-monogram {
+  display: grid;
+  place-items: center;
+  width: 78px;
+  height: 78px;
+  filter: sepia(0.5);
+  mix-blend-mode: multiply;
+  opacity: 0.8;
+}
+.unseal-label {
+  display: block;
+  text-align: center;
+  margin-top: 44px;
+  font:
+    italic 17px Georgia,
+    serif;
+  letter-spacing: 0.7px;
+  color: #5d6750;
+}
+.opening-complete {
+  pointer-events: none;
+}
+/* One clock coordinates physical phases. The JS fallback handles interruption. */
+.unsealing .seal-control {
+  animation: seal-compress var(--opening) var(--motion-ease) both;
+}
+.unsealing .half-left {
+  animation: wax-left var(--opening) ease both;
+}
+.unsealing .half-right {
+  animation: wax-right var(--opening) ease both;
+}
+.unsealing .envelope-flap {
+  animation: flap-lift var(--opening) var(--motion-ease) both;
+}
+.unsealing .paper-letter {
+  animation: letter-extract var(--opening) var(--motion-ease) both;
+}
+.unsealing .physical-envelope {
+  animation: envelope-away var(--opening) ease both;
+}
+.unsealing .unseal-label {
+  transition: opacity 200ms;
+  opacity: 0;
+}
+.unsealing {
+  animation: scene-dissolve var(--opening) ease both;
+}
+.unsealing .opening-complete {
+  animation: opening-clock var(--opening) linear;
+}
+@keyframes seal-compress {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  8% {
+    transform: translate(-50%, -50%) scale(0.95);
+    filter: drop-shadow(0 2px 1px #684c3a50);
+  }
+  16%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+@keyframes wax-left {
+  0%,
+  10% {
+    transform: none;
+    opacity: 1;
+  }
+  26% {
+    transform: translate(-6px, 3px) rotate(-7deg);
+    opacity: 1;
+  }
+  42%,
+  100% {
+    transform: translate(-12px, 20px) rotate(-12deg);
+    opacity: 0;
+  }
+}
+@keyframes wax-right {
+  0%,
+  10% {
+    transform: none;
+    opacity: 1;
+  }
+  26% {
+    transform: translate(6px, 2px) rotate(6deg);
+    opacity: 1;
+  }
+  42%,
+  100% {
+    transform: translate(12px, 15px) rotate(10deg);
+    opacity: 0;
+  }
+}
+@keyframes flap-lift {
+  0%,
+  18% {
+    transform: rotateX(0);
+    z-index: 4;
+  }
+  48%,
+  100% {
+    transform: rotateX(178deg);
+    z-index: 0;
+  }
+}
+@keyframes letter-extract {
+  0%,
+  32% {
+    transform: none;
+  }
+  64% {
+    transform: translateY(-52%) rotate(2deg);
+    z-index: 1;
+  }
+  75% {
+    transform: translateY(-53%) rotate(2deg);
+    z-index: 5;
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-18%) rotate(2deg) scale(1.65);
+    z-index: 5;
+    opacity: 0;
+  }
+}
+@keyframes envelope-away {
+  0%,
+  65% {
+    transform: rotate(-2deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(8vh) rotate(0);
+    opacity: 0;
+  }
+}
+@keyframes scene-dissolve {
+  0%,
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes opening-clock {
+  from {
+    --clock: 0;
+  }
+  to {
+    --clock: 1;
+  }
+}
+/* Local atmosphere does not receive pointer events or create document overflow. */
+.botanical-scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 2;
+  contain: layout paint;
+}
+.living-floral {
+  position: absolute;
+  width: 42%;
+  height: 58%;
+  background-image: url("/garden-800.webp");
+  background-size: 238% 175%;
+  opacity: 0.55;
+  transform-origin: bottom center;
+  mask-image:
+    linear-gradient(90deg, #000 45%, transparent),
+    linear-gradient(#000 70%, transparent);
+  mask-composite: intersect;
+  animation: branch-sway 13s ease-in-out infinite alternate;
+}
+.floral-a {
+  left: -4%;
+  top: -8%;
+  background-position: top left;
+}
+.floral-b {
+  right: -4%;
+  bottom: -5%;
+  background-position: bottom right;
+  transform-origin: bottom right;
+  animation-duration: 17s;
+  animation-delay: -7s;
+  mask-image:
+    linear-gradient(270deg, #000 35%, transparent),
+    linear-gradient(0deg, #000 70%, transparent);
+}
+@keyframes branch-sway {
+  from {
+    transform: rotate(-1.3deg) translateY(0);
+  }
+  to {
+    transform: rotate(1.5deg) translateY(5px);
+  }
+}
+.scene-bird {
+  position: absolute;
+  width: 39px;
+  left: -50px;
+  top: 18%;
+  opacity: 0.65;
+  animation: bird-flight 24s linear infinite;
+}
+.scene-bird svg {
+  width: 100%;
+  fill: #bba4a4;
+  stroke: #827d7040;
+  stroke-width: 1;
+}
+.bird-route-1 {
+  top: 75%;
+  animation: bird-flight-back 31s linear -14s infinite;
+  width: 31px;
+}
+.bird-route-1 svg {
+  fill: #8b9e83;
+}
+.bird-wing {
+  transform-origin: 52px 39px;
+  animation: wing-beat 900ms ease-in-out infinite alternate;
+}
+.bird-wing.far {
+  animation-delay: -300ms;
+  opacity: 0.6;
+}
+@keyframes wing-beat {
+  to {
+    transform: scaleY(0.25) rotate(9deg);
+  }
+}
+@keyframes bird-flight {
+  0% {
+    left: -50px;
+    transform: translateY(25px) rotate(-4deg);
+  }
+  40% {
+    transform: translateY(-26px) rotate(4deg);
+  }
+  75%,
+  100% {
+    left: 110%;
+    transform: translateY(12px) rotate(-5deg);
+  }
+}
+@keyframes bird-flight-back {
+  0% {
+    left: 110%;
+    transform: scaleX(-1) translateY(0);
+  }
+  40% {
+    transform: scaleX(-1) translateY(-38px);
+  }
+  80%,
+  100% {
+    left: -50px;
+    transform: scaleX(-1) translateY(20px);
+  }
+}
+.scene-petal {
+  position: absolute;
+  top: -20px;
+  left: calc(12% + var(--n) * 32%);
+  width: 7px;
+  height: 12px;
+  background: #d6a9a280;
+  border-radius: 90% 15% 85% 15%;
+  animation: petal-fall calc(19s + var(--n) * 4s) linear infinite;
+  animation-delay: calc(var(--n) * -8s);
+}
+@keyframes petal-fall {
+  to {
+    transform: translate(35px, 100vh) rotate(240deg);
+    opacity: 0;
+  }
+}
+.scene-paused * {
+  animation-play-state: paused !important;
+}
+.hero {
+  position: relative;
+  min-height: 890px;
+}
+.refined-invitation .couple-watermark {
+  opacity: var(--portrait-opacity, 0.43) !important;
+  object-fit: cover;
+  object-position: 50% 45%;
+  filter: saturate(0.7);
+}
+.hero-copy {
+  position: relative;
+  z-index: 4;
+}
+.hero:after {
+  background: radial-gradient(ellipse at 50% 35%, #fffaf06b, transparent 80%);
+}
+.hero-copy > * {
+  animation: hero-rise 900ms var(--motion-ease) both;
+}
+.is-revealing .hero-copy > * {
+  animation: none;
+  opacity: 0;
+}
+.hero-copy > :nth-child(2) {
+  animation-delay: 80ms;
+}
+.hero-copy > :nth-child(3) {
+  animation-delay: 160ms;
+}
+.hero-copy > :nth-child(4) {
+  animation-delay: 240ms;
+}
+.hero-copy > :nth-child(5) {
+  animation-delay: 320ms;
+}
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+/* Reveals only hide elements after JS successfully attaches an observer. */
+.transition {
+  transition:
+    opacity 650ms ease var(--delay, 0ms),
+    transform 650ms var(--motion-ease) var(--delay, 0ms);
+}
+.transition.waiting {
+  opacity: 0;
+}
+.transition.waiting[data-transition="vertical"] {
+  transform: translateY(20px);
+}
+.transition.waiting[data-transition="horizontal"] {
+  transform: translateX(24px);
+}
+.transition.visible {
+  opacity: 1;
+  transform: none;
+}
+.state-leaving {
+  opacity: 0;
+  transform: translateY(-5px);
+  transition: 180ms ease;
+}
+.state-arriving {
+  animation: state-enter 350ms ease both;
+}
+@keyframes state-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.progressive-timeline {
+  position: relative;
+}
+.progressive-timeline article {
+  position: relative;
+  z-index: 1;
+}
+.progressive-timeline article:before {
+  display: none !important;
+}
+.timeline-rail {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  bottom: 95px;
+  width: 1px;
+  background: #a6b49c44;
+}
+.timeline-rail span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #8d9e7d;
+  transform: scaleY(var(--line-progress, 0));
+  transform-origin: top;
+}
+.timeline-number {
+  background: #f4f2e8;
+}
+.timeline article p {
+  overflow-wrap: anywhere;
+}
+.venue-card {
+  margin-top: 30px;
+  padding: 30px 22px;
+  border: 1px solid #aeb79c88;
+  border-radius: 140px 140px 12px 12px;
+  background:
+    linear-gradient(#fcfaf2da, #fcfaf2de),
+    url("/garden-480.webp") center/cover;
+  text-align: center;
+}
+.venue-card-heading p {
+  font-size: 14px;
+}
+.venue-card .button {
+  margin: 20px auto 0;
+  display: inline-flex;
+}
+.styled-map {
+  height: 0;
+  visibility: hidden;
+  overflow: hidden;
+  border-radius: 16px;
+}
+.styled-map:not(.map-ready) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.styled-map.map-ready {
+  height: 300px;
+  visibility: visible;
+  margin-top: 20px;
+}
+.venue-pin {
+  width: 44px;
+  height: 44px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: #697e5b;
+  color: #fffaf2;
+  border: 3px solid #faf5e9;
+  display: grid;
+  place-items: center;
+  font-size: 25px;
+  box-shadow: 0 3px 7px #33472a44;
+}
+.returning-guest {
+  font-size: 14px;
+  border-bottom: 1px solid #879a7333;
+  padding-bottom: 20px;
+  margin-bottom: 24px;
+}
+.otp-access {
+  display: grid;
+  gap: 16px;
+}
+.otp-access label {
+  display: grid;
+  gap: 8px;
+}
+.otp-access input {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #9eac9255;
+  background: #fffbf5;
+  border-radius: 4px;
+}
+.botanical-confirmation {
+  background:
+    linear-gradient(#fffaf0e6, #fffaf0ed),
+    url("/garden-480.webp") center/cover;
+  border: 1px solid #a4af9255;
+  padding: 26px 18px;
+  text-align: center;
+}
+.botanical-confirmation h3 {
+  font-size: 27px;
+  line-height: 1.4;
+}
+.confirmation-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.rsvp-form input[readonly] {
+  background: #e9eddf;
+  color: #526447;
+}
+.privacy-note {
+  margin-top: 20px;
+}
+.illustrated-closing {
+  position: relative;
+  padding: 0 !important;
+  background: #f8f5ed;
+  overflow: hidden;
+  min-height: 0;
+  isolation: isolate;
+}
+.closing-portrait {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  mask-image: linear-gradient(transparent, #000 8%, #000 85%, transparent);
+}
+.closing-copy {
+  position: relative;
+  z-index: 4;
+  padding: 10px 24px 65px;
+  margin-top: -25px;
+}
+.closing-copy p {
+  font:
+    34px/1.4 Georgia,
+    serif;
+  color: #56694a;
+}
+.closing-copy .closing-date {
+  font-size: 13px;
+  letter-spacing: 2px;
+  margin-top: 15px;
+}
+.illustrated-closing .floral-a {
+  height: 35%;
+}
+.illustrated-closing .floral-b {
+  height: 42%;
+}
+.botanical-progress {
+  position: fixed;
+  right: 12px;
+  top: 35%;
+  height: 30vh;
+  width: 8px;
+  z-index: 10;
+  pointer-events: none;
+}
+.botanical-progress span {
+  display: block;
+  width: 1px;
+  height: 100%;
+  background: #9da98b66;
+}
+.botanical-progress i {
+  position: absolute;
+  left: -6px;
+  top: calc(var(--progress, 0) * 100%);
+  font-size: 20px;
+  color: #869976;
+}
+footer {
+  gap: 15px;
+  flex-wrap: wrap;
+  padding-bottom: max(25px, env(safe-area-inset-bottom));
+}
+.privacy-banner {
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
+}
+@media (min-width: 1000px) {
+  body:before,
+  body:after {
+    content: "";
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: calc((100vw - 680px) / 2);
+    background: url("/garden-800.webp") center/cover;
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: -1;
+  }
+  body:before {
+    left: 0;
+  }
+  body:after {
+    right: 0;
+    transform: scaleX(-1);
+  }
+  .hero h1 {
+    font-size: 94px;
+  }
+  .hero {
+    min-height: 940px;
+  }
+  .section {
+    padding-inline: 60px;
+  }
+}
+@media (max-width: 430px) {
+  .nav {
+    padding: 6px 12px;
+    gap: 6px;
+  }
+  .nav nav {
+    gap: 10px;
+  }
+  .nav .brand-mark {
+    width: 32px;
+    height: 32px;
+  }
+  .return-envelope {
+    font-size: 9px;
+  }
+  .nav a {
+    font-size: 9px;
+  }
+  .hero {
+    padding-inline: 20px;
+    min-height: 850px;
+  }
+  .hero h1 {
+    font-size: clamp(57px, 16vw, 72px);
+  }
+  .section {
+    padding-inline: 24px;
+  }
+  .form-card {
+    padding-inline: 18px;
+  }
+  .timeline article {
+    grid-template-columns: 40px minmax(0, 1fr);
+    gap: 16px;
+  }
+  .timeline-rail {
+    left: 19px;
+  }
+  .botanical-progress {
+    display: none;
+  }
+  .scene-petal:nth-of-type(3) {
+    display: none;
+  }
+  .envelope-scene {
+    width: 87vw;
+  }
+  .unseal-label {
+    margin-top: 35px;
+  }
+  .date-line > span:first-child {
+    font-size: 29px !important;
+  }
+  .closing-copy p {
+    font-size: 30px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *:before,
+  *:after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .transition.waiting,
+  .reveal.ready {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .botanical-scene .scene-bird,
+  .scene-petal {
+    display: none;
+  }
+  .timeline-rail span {
+    transform: scaleY(1);
+  }
+  .is-revealing .hero-copy > * {
+    opacity: 1;
+  }
+  .refined-invitation.is-revealed {
+    opacity: 1;
+  }
+}
+/* OTP is a small stationery form, with the same generous mobile input targets. */
+.otp-card form,
+.otp-card label {
+  display: grid;
+  gap: 12px;
+}
+.otp-card form {
+  margin: 20px 0;
+}
+.otp-card input {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #9eac9266;
+  background: #fffbf5;
+  border-radius: 4px;
+}
+.otp-input {
+  letter-spacing: 0.6em;
+  text-align: center;
+}
+.botanical-confirmation:after {
+  content: "❧";
+  display: block;
+  color: #b88d8e;
+  font-size: 32px;
+  margin-top: 18px;
+  animation: confirmation-bloom 900ms ease both;
+}
+@keyframes confirmation-bloom {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) rotate(-12deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

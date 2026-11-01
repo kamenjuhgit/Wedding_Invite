@@ -1,0 +1,140 @@
+/* A locally served, licensed calligraphy font: no Google Fonts request needed. */
+@font-face {
+  font-family: "Wedding Allura";
+  src: url("/fonts/Allura-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+/* Scope the new lettering to the first-page names; all other type stays intact. */
+.refined-invitation .hero .hero-copy h1 {
+  font-family: "Wedding Allura", "Brush Script MT", cursive;
+  font-size: clamp(64px, 13vw, 108px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: 0;
+  padding-inline: 12px;
+}
+.refined-invitation .hero .hero-copy h1 em {
+  font-family: inherit;
+  font-style: normal;
+  font-size: 0.57em;
+  line-height: 0.9;
+  letter-spacing: 0;
+}
+/* All closing-page overrides live here, leaving the earlier sections unchanged. */
+.refined-invitation .closing-blessing {
+  position: relative;
+  container-type: inline-size;
+  padding-top: clamp(48px, 9vw, 64px) !important;
+  background: #faf7ef;
+  isolation: isolate;
+}
+.closing-blessing .closing-artwork {
+  position: relative;
+}
+.refined-invitation .closing-blessing .closing-portrait {
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 0.72;
+  filter: saturate(0.85);
+  mask-image: linear-gradient(#000 92%, transparent);
+}
+.refined-invitation .closing-blessing .closing-copy {
+  position: absolute;
+  inset: 3% 12% auto;
+  margin: 0;
+  padding: 0;
+  z-index: 4;
+  text-align: center;
+  color: #56694a;
+}
+.closing-blessing .closing-copy .brand-mark {
+  width: clamp(55px, 13cqw, 90px);
+  height: clamp(55px, 13cqw, 90px);
+  object-fit: contain;
+  margin: 0 auto;
+}
+.refined-invitation .closing-blessing .closing-names {
+  font:
+    400 clamp(29px, 7cqw, 48px) / 1.15 "Wedding Allura",
+    cursive;
+  letter-spacing: 0;
+  margin: 9px 0 5px;
+}
+.refined-invitation .closing-blessing .closing-date {
+  font:
+    400 clamp(12px, 2.8cqw, 19px) / 1.4 Georgia,
+    serif;
+  letter-spacing: 0.06em;
+  margin: 0 0 9px;
+}
+.refined-invitation .closing-blessing .closing-scripture {
+  font:
+    italic clamp(13px, 3cqw, 20px) / 1.4 Georgia,
+    serif;
+  margin: 0;
+  text-wrap: balance;
+}
+.refined-invitation .closing-blessing .closing-verse {
+  font:
+    400 clamp(10px, 2.1cqw, 14px) / 1.5 Georgia,
+    serif;
+  letter-spacing: 0.08em;
+  margin: 5px 0 0;
+}
+/* Only the open pond on the right receives ripples; never animate faces/body. */
+.closing-water {
+  position: absolute;
+  inset: 55% 0 auto auto;
+  width: 24%;
+  height: 13%;
+  overflow: hidden;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse, #000 15%, transparent 72%);
+}
+.closing-water span {
+  position: absolute;
+  inset: -10%;
+  background: repeating-linear-gradient(
+    177deg,
+    transparent 0 12px,
+    #fffcf1a3 13px 14px,
+    transparent 16px 25px
+  );
+  opacity: 0.35;
+  animation: pond-light 8s ease-in-out infinite alternate;
+}
+.closing-water span + span {
+  animation-delay: -4s;
+  animation-duration: 11s;
+  opacity: 0.2;
+}
+@keyframes pond-light {
+  from {
+    transform: translate(-5px, -2px) scaleX(0.96);
+    opacity: 0.2;
+  }
+  to {
+    transform: translate(5px, 2px) scaleX(1.06);
+    opacity: 0.45;
+  }
+}
+.water-paused .closing-water span {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .closing-water {
+    display: none;
+  }
+}
+
+/* Family hosts introduce the names without crowding narrow portrait stationery. */
+.refined-invitation .hero .family-invitation {
+  max-width: 34em;
+  margin: 0 auto 1.25rem;
+  font-size: clamp(.95rem, 2.5vw, 1.15rem);
+  line-height: 1.65;
+  text-wrap: pretty;
+}
