@@ -1,5 +1,5 @@
 import React, { useId } from "react";
-import Monogram from "./Monogram";
+import branding from "./branding.json";
 
 // A scalable wax impression: irregular pooled rim, inset stamp and raised initials.
 // Light and shadow are separate SVG passes, so the monogram stays sharp on phones.
@@ -90,11 +90,18 @@ export default function WaxSeal() {
           strokeWidth=".6"
           opacity=".7"
         />
-        <foreignObject x="41" y="41" width="78" height="78">
-          <div xmlns="http://www.w3.org/1999/xhtml" className="wax-monogram">
-            <Monogram size={78} />
-          </div>
-        </foreignObject>
+        {/* Native SVG coordinates avoid Safari foreignObject/filter positioning bugs.
+            The 78 × 78 image is centred at (80, 80) and preserves PNG transparency. */}
+        <image
+          href={branding.monogram}
+          x="41"
+          y="41"
+          width="78"
+          height="78"
+          preserveAspectRatio="xMidYMid meet"
+          opacity="0.85"
+          pointerEvents="none"
+        />
         <circle
           cx="80"
           cy="80"
