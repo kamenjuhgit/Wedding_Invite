@@ -1,18 +1,24 @@
 import { defineConfig, loadEnv } from "vite";
 import branding from "./src/branding.json" with { type: "json" };
 // Same-origin development proxy eliminates hardcoded browser localhost API addresses.
-// Production uses VITE_API_URL; Netlify builds fail early if deployment values are missing.
+// Production uses VITE_API_URL; Netlify builds fail early on a missing site URL or non-HTTPS values.
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   const site = env.VITE_SITE_URL || env.URL || "";
-  if (
-    process.env.NETLIFY &&
-    mode !== "admin" &&
-    (!/^https:\/\//.test(site) || !/^https:\/\//.test(env.VITE_API_URL || ""))
-  )
-    throw new Error(
-      "Set VITE_SITE_URL and VITE_API_URL to your public HTTPS frontend and backend URLs.",
-    );
+  if (process.env.NETLIFY && mode !== "admin") {
+    if (!/^https:\/\//.test(site))
+      throw new Error(
+        "Set VITE_SITE_URL to your public HTTPS frontend URL.",
+      );
+    // A missing API URL still deploys the invitation; RSVPs show a clear
+    // "service unavailable" message until a public HTTPS backend exists.
+    if (!env.VITE_API_URL)
+      console.warn(
+        "VITE_API_URL is not set: RSVP and guest API features are unavailable on this deploy.",
+      );
+    else if (!/^https:\/\//.test(env.VITE_API_URL))
+      throw new Error("VITE_API_URL must be a public HTTPS backend URL.");
+  }
   const escape = (value) =>
     String(value)
       .replaceAll("&", "&amp;")
