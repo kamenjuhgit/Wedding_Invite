@@ -4,7 +4,7 @@ export const wedding = {
   names: ["Selam", "Kamenju"],
   portraitImage: "/couple-pastel.webp",
   portraitOpacity: 0.43, // 0 = invisible, 1 = full image; keep text readable.
-  dateLabel: "6 January 2027",
+  dateLabel: "6 February 2027",
   // Countdown to the wedding date at midnight Nairobi time, not the ceremony start time.
   dateISO: "2027-01-06T00:00:00+03:00",
   venue: "Eva’s Garden Redhill",
@@ -14,7 +14,7 @@ export const wedding = {
   placeId: "ChIJSWtz6NsjLxgRKUG333V1j48",
   address: "St Julian’s Road, Redhill, Kiambu County, Kenya",
   coordinates: { lat: -1.1774072, lng: 36.702287 },
-  calendarDate: "2027-01-06",
+  calendarDate: "2027-02-06",
   rsvpDeadline: "Please respond when you can",
   maxGuests: 6, // Keep in sync with MAX_GUESTS in backend/.env. Includes the responding guest.
   dressCode: "Dress beautifully. Feel comfortable.",
