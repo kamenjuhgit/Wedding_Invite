@@ -6,7 +6,7 @@ export const wedding = {
   portraitOpacity: 0.43, // 0 = invisible, 1 = full image; keep text readable.
   dateLabel: "6 February 2027",
   // Countdown to the wedding date at midnight Nairobi time, not the ceremony start time.
-  dateISO: "2027-01-06T00:00:00+03:00",
+  dateISO: "2027-02-06T00:00:00+03:00",
   venue: "Eva’s Garden Redhill",
   location: "Redhill, Kenya",
   mapsURL:
